@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>tratamento_dados.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #cf8e6d;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+tratamento_dados.py</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">import </span><span class="s0">pandas </span><span class="s1">as </span><span class="s0">pd</span>
+
+<span class="s0">pd</span><span class="s2">.</span><span class="s0">set_option</span><span class="s2">(</span><span class="s3">'display.max_columns'</span><span class="s2">, </span><span class="s1">None</span><span class="s2">)</span>
+<span class="s0">pd</span><span class="s2">.</span><span class="s0">set_option</span><span class="s2">(</span><span class="s3">'display.max_rows'</span><span class="s2">, </span><span class="s1">None</span><span class="s2">)</span>
+
+<span class="s0">df </span><span class="s2">= </span><span class="s0">pd</span><span class="s2">.</span><span class="s0">read_csv</span><span class="s2">(</span><span class="s3">'ecommerce_preparados.csv'</span><span class="s2">)</span>
+<span class="s0">print</span><span class="s2">(</span><span class="s0">df</span><span class="s2">.</span><span class="s0">head</span><span class="s2">(</span><span class="s4">20</span><span class="s2">).</span><span class="s0">to_string</span><span class="s2">())</span>
+<span class="s0">print</span><span class="s2">(</span><span class="s0">df</span><span class="s2">.</span><span class="s0">tail</span><span class="s2">(</span><span class="s4">20</span><span class="s2">).</span><span class="s0">to_string</span><span class="s2">())</span>
+
+<span class="s5"># Preenche valores nulos com a média da coluna de &quot;Qtd_Vendidos_Cod&quot;</span>
+<span class="s0">df</span><span class="s2">[</span><span class="s3">'Qtd_Vendidos_Cod'</span><span class="s2">] = </span><span class="s0">df</span><span class="s2">[</span><span class="s3">'Qtd_Vendidos_Cod'</span><span class="s2">].</span><span class="s0">fillna</span><span class="s2">(</span><span class="s0">df</span><span class="s2">[</span><span class="s3">'Qtd_Vendidos_Cod'</span><span class="s2">].</span><span class="s0">mean</span><span class="s2">())</span>
+
+<span class="s5"># Retirar valores nulos do desconto</span>
+<span class="s0">df </span><span class="s2">= </span><span class="s0">df</span><span class="s2">.</span><span class="s0">dropna</span><span class="s2">(</span><span class="s0">subset</span><span class="s2">=[</span><span class="s3">'Desconto'</span><span class="s2">])</span>
+
+<span class="s5"># Retirar valores nulos da &quot;Nota&quot;</span>
+<span class="s0">df </span><span class="s2">= </span><span class="s0">df</span><span class="s2">.</span><span class="s0">dropna</span><span class="s2">(</span><span class="s0">subset</span><span class="s2">=[</span><span class="s3">'Nota'</span><span class="s2">])</span>
+
+<span class="s5"># Retirar valores nulos da &quot;Gênero&quot;</span>
+<span class="s0">df </span><span class="s2">= </span><span class="s0">df</span><span class="s2">.</span><span class="s0">dropna</span><span class="s2">(</span><span class="s0">subset</span><span class="s2">=[</span><span class="s3">'Gênero'</span><span class="s2">])</span>
+
+<span class="s5"># Preenche valores nulos com a média da coluna de &quot;Preço&quot;</span>
+<span class="s0">df</span><span class="s2">[</span><span class="s3">'Preço'</span><span class="s2">] = </span><span class="s0">df</span><span class="s2">[</span><span class="s3">'Preço'</span><span class="s2">].</span><span class="s0">fillna</span><span class="s2">(</span><span class="s0">df</span><span class="s2">[</span><span class="s3">'Preço'</span><span class="s2">].</span><span class="s0">mean</span><span class="s2">())</span>
+
+<span class="s0">print</span><span class="s2">(</span><span class="s0">df</span><span class="s2">.</span><span class="s0">head</span><span class="s2">(</span><span class="s4">20</span><span class="s2">).</span><span class="s0">to_string</span><span class="s2">())</span>
+<span class="s0">df</span><span class="s2">.</span><span class="s0">to_csv</span><span class="s2">(</span><span class="s3">'ecommerce_tratados.csv'</span><span class="s2">, </span><span class="s0">index </span><span class="s2">= </span><span class="s1">False</span><span class="s2">)</span></pre>
+</body>
+</html>
